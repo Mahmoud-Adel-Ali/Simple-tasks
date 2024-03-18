@@ -1,19 +1,16 @@
 import 'package:bmi_calc/constant.dart';
 import 'package:bmi_calc/core/text_styles.dart';
+import 'package:bmi_calc/manager/age_and_wight/age_and_wight_cubit.dart';
+import 'package:bmi_calc/manager/gender/gender_cubit.dart';
+import 'package:bmi_calc/manager/slider/slider_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CalculatorView extends StatelessWidget {
-  const CalculatorView(
-      {super.key,
-      required this.gender,
-      required this.age,
-      required this.hieght,
-      required this.wight});
-  final String gender;
-  final int age;
-  final int hieght;
-  final int wight;
+  const CalculatorView({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,10 +27,17 @@ class CalculatorView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CalcViewSection1(),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              alignment: Alignment.center,
+              width: double.infinity,
+              child: Text(
+                "Your Result",
+                style: Styles.textStyle35.copyWith(color: Colors.white),
+              ),
+            ),
             const SizedBox(height: 25),
-            CalcViewSection2(
-                gender: gender, age: age, hieght: hieght, wight: wight),
+            const CalcViewSection2(),
             const SizedBox(height: 25),
             Container(
               height: 70,
@@ -56,43 +60,18 @@ class CalculatorView extends StatelessWidget {
   }
 }
 
-class CalcViewSection1 extends StatelessWidget {
-  const CalcViewSection1({
-    super.key,
-  });
+class CalcViewSection2 extends StatelessWidget {
+  const CalcViewSection2({super.key});
 
+  // final int age;
+  // final int wight;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      alignment: Alignment.center,
-      width: double.infinity,
-      child: Text(
-        "Your Result",
-        style: Styles.textStyle35.copyWith(color: Colors.white),
-      ),
-    );
-  }
-}
-
-class CalcViewSection2 extends StatefulWidget {
-  const CalcViewSection2(
-      {super.key,
-      required this.gender,
-      required this.age,
-      required this.hieght,
-      required this.wight});
-  final String gender;
-  final int age;
-  final int hieght;
-  final int wight;
-  @override
-  State<CalcViewSection2> createState() => _CalcViewSection2State();
-}
-
-class _CalcViewSection2State extends State<CalcViewSection2> {
-  @override
-  Widget build(BuildContext context) {
+    final int hieght =
+        BlocProvider.of<SliderCubit>(context).current_person_heigt;
+    final wight =
+        BlocProvider.of<AgeAndWightCubit>(context).current_person_wight;
+    final age = BlocProvider.of<AgeAndWightCubit>(context).current_person_age;
     String getClassification(double bmi) {
       if (bmi < 16) {
         return "Severe Thinness";
@@ -133,7 +112,7 @@ class _CalcViewSection2State extends State<CalcViewSection2> {
       }
     }
 
-    final myBmi = ((703 * widget.hieght) / (widget.wight * widget.wight));
+    final myBmi = ((703 * hieght) / (wight * wight));
     return Container(
       height: 550,
       width: MediaQuery.of(context).size.width * 0.8,
@@ -145,25 +124,27 @@ class _CalcViewSection2State extends State<CalcViewSection2> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Text(
-            widget.gender,
+            BlocProvider.of<GenderCubit>(context).current_person_is_male
+                ? "Male"
+                : "Femal",
             style: Styles.textStyle25,
           ),
           Text(
             getClassification(myBmi),
             style: Styles.greenText27,
           ),
-          Text((myBmi).toString().substring(0,5), style: Styles.numStyle),
+          Text((myBmi).toString().substring(0, 5), style: Styles.numStyle),
           Column(
             children: [
               Text(
                 "${getClassification(myBmi)} BMI range",
-                style: Styles.textStyle25.copyWith(
-                    fontWeight: FontWeight.w200, color: Colors.grey),
+                style: Styles.textStyle25
+                    .copyWith(fontWeight: FontWeight.w200, color: Colors.grey),
               ),
               Text(
                 "${getBMI(myBmi)} ",
-                style: Styles.textStyle25.copyWith(
-                    fontWeight: FontWeight.w200, color: Colors.grey),
+                style: Styles.textStyle25
+                    .copyWith(fontWeight: FontWeight.w200, color: Colors.grey),
               ),
             ],
           ),
@@ -172,8 +153,9 @@ class _CalcViewSection2State extends State<CalcViewSection2> {
               Text(
                 "You have a ${getClassification(myBmi)}",
                 style: Styles.greenText27,
-              ),Text(
-                "body weight ${myBmi<35?", good job":''}",
+              ),
+              Text(
+                "body weight ${myBmi < 35 ? ", good job" : ''}",
                 style: Styles.greenText27,
               ),
             ],

@@ -14,7 +14,7 @@ class HomeView extends StatelessWidget {
         title:  Text("BMI Calculator",style: Styles.textStyle25,),
         centerTitle: true,
       ),
-      body: const HomeViewBody(),
+      body:  HomeViewBody(),
     );
   }
 }
