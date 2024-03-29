@@ -25,8 +25,17 @@ class LayoutBuilderExample extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: MobileLayout(),
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constrains) {
+        log(constrains.maxWidth.toString());
+        if (constrains.maxWidth <= 450) {
+          return const MobileLayout();
+        }else {
+          return const Center(
+          child: Text("Anther layout"),
+        );
+        }
+      }),
     );
   }
 }
