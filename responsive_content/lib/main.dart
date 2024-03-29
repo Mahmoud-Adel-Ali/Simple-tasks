@@ -16,35 +16,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ExpandedExample(),
+      home: AspecratioExampl(),
     );
   }
 }
 
-class ExpandedExample extends StatefulWidget {
-  const ExpandedExample({super.key});
-
-  @override
-  State<ExpandedExample> createState() => _ExpandedExampleState();
-}
-
-class _ExpandedExampleState extends State<ExpandedExample> {
-  var img = 'https://avatars.githubusercontent.com/u/141450980?v=4';
+class AspecratioExampl extends StatelessWidget {
+  const AspecratioExampl({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView.builder(
-        itemCount: 5,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          crossAxisSpacing: 4,
-          mainAxisSpacing: 4,
+    return  Scaffold(
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: AspectRatio(
+          aspectRatio: 1/1,// width / height
+          child: Container(
+            color: Colors.amber,
+            width: MediaQuery.sizeOf(context).width,
+            // height: 100,
+          ),
         ),
-        itemBuilder: (context, index) {
-          return FittedBox(child: Image.network(img));
-        },
       ),
+
     );
   }
 }
