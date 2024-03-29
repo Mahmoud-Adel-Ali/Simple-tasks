@@ -21,39 +21,29 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ExpandedExample extends StatelessWidget {
+class ExpandedExample extends StatefulWidget {
   const ExpandedExample({super.key});
+
+  @override
+  State<ExpandedExample> createState() => _ExpandedExampleState();
+}
+
+class _ExpandedExampleState extends State<ExpandedExample> {
+  var img = 'https://avatars.githubusercontent.com/u/141450980?v=4';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Flexible(
-              child: FittedBox(
-                  child: Icon(
-            Icons.ac_unit,
-            size: 300,
-          ))),
-          Container(
-            color: Colors.amber,
-            height: 150,
-          ),
-          Expanded(
-            child: Container(
-              color: Colors.black12,
-              height: 150,
-              child: const FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Icon(Icons.abc),
-              ),
-            ),
-          ),
-          Container(
-            color: Colors.green,
-            height: 150,
-          ),
-        ],
+      body: GridView.builder(
+        itemCount: 5,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          crossAxisSpacing: 4,
+          mainAxisSpacing: 4,
+        ),
+        itemBuilder: (context, index) {
+          return FittedBox(child: Image.network(img));
+        },
       ),
     );
   }
