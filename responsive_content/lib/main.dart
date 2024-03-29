@@ -15,37 +15,42 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeVeiw(),
+      home: LayoutBuilderExample(),
     );
   }
 }
 
-class HomeVeiw extends StatelessWidget {
-  const HomeVeiw({super.key});
+class LayoutBuilderExample extends StatelessWidget {
+  const LayoutBuilderExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    log(height.toString());
-    return Scaffold(
-        body: Column(
-      children: [
-        Container(
-          height: height * 0.3,
-          width: 200,
-          color: Colors.amber,
-        ),
-        Container(
-          height: height * 0.3,
-          width: 200,
-          color: Colors.black,
-        ),
-        Container(
-          height: height * 0.3,
-          width: 200,
-          color: Colors.green,
-        ),
-      ],
-    ));
+    return const Scaffold(
+      body: MobileLayout(),
+    );
+  }
+}
+
+class MobileLayout extends StatelessWidget {
+  const MobileLayout({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.amber,
+            margin: const EdgeInsets.all(5),
+            child: ListTile(
+              title: Text("${index + 1}"),
+            ),
+          );
+        },
+      ),
+    );
   }
 }
