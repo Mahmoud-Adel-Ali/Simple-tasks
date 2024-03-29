@@ -16,29 +16,59 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AspecratioExampl(),
+      home: IntrinsicExample(),
     );
   }
 }
 
-class AspecratioExampl extends StatelessWidget {
-  const AspecratioExampl({super.key});
+class IntrinsicExample extends StatelessWidget {
+  const IntrinsicExample({super.key});
 
+  /// Intrinsic Widgets : Intrinsic Height
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: AspectRatio(
-          aspectRatio: 1/1,// width / height
-          child: Container(
-            color: Colors.amber,
-            width: MediaQuery.sizeOf(context).width,
-            // height: 100,
+    return Scaffold(
+      body: Center(
+        child: IntrinsicHeight(
+          child: Row(
+            children: [
+              Expanded(
+                child: Container(
+                  color: Colors.amber,
+                  child: const Column(
+                    children: [
+                      Text("Mahmoud"),
+                      Text("Mahmoud"),
+                      Text("Mahmoud"),
+                      Text("Mahmoud"),
+                      Text("Mahmoud"),
+                      Text("Mahmoud"),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.black,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child: Container(
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
-
     );
   }
 }
