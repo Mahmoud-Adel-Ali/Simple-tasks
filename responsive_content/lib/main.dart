@@ -30,12 +30,52 @@ class LayoutBuilderExample extends StatelessWidget {
         log(constrains.maxWidth.toString());
         if (constrains.maxWidth <= 450) {
           return const MobileLayout();
-        }else {
-          return const Center(
-          child: Text("Anther layout"),
-        );
+        } else {
+          return const DesktopLayout();
         }
       }),
+    );
+  }
+}
+
+class DesktopLayout extends StatefulWidget {
+  const DesktopLayout({super.key});
+
+  @override
+  State<DesktopLayout> createState() => _DesktopLayoutState();
+}
+
+class _DesktopLayoutState extends State<DesktopLayout> {
+  int currentIndex = 1;
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return InkWell(
+                onTap: () {
+                  currentIndex = index + 1;
+                  setState(() {});
+                },
+                child: Container(
+                  color: Colors.amber,
+                  margin: const EdgeInsets.all(5),
+                  child: ListTile(
+                    title: Text("${index + 1}"),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        Expanded(
+            child: Center(
+              child: Text(currentIndex.toString()),
+            ))
+      ],
     );
   }
 }
