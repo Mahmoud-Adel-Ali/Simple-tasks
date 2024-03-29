@@ -28,26 +28,18 @@ class ExpandedExample extends StatelessWidget {
     return  Scaffold(
       body: Column(
         children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.amber,
-              height: 150,
-            ),
+          Flexible(child: const Icon(Icons.ac_unit , size: 300,)),
+          Container(
+            color: Colors.amber,
+            height: 150,
           ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              color: Colors.black,
-              height: 150,
-            ),
+          Container(
+            color: Colors.black,
+            height: 150,
           ),
-          Expanded(
-            flex: 1,// by default  =  1
-            child: Container(
-              color: Colors.green,
-              height: 150,
-            ),
+          Container(
+            color: Colors.green,
+            height: 150,
           ),
         ],
       ),
