@@ -20,22 +20,34 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class ExpandedExample extends StatelessWidget {
   const ExpandedExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Column(
         children: [
-          Flexible(child: const Icon(Icons.ac_unit , size: 300,)),
+          const Flexible(
+              child: FittedBox(
+                  child: Icon(
+            Icons.ac_unit,
+            size: 300,
+          ))),
           Container(
             color: Colors.amber,
             height: 150,
           ),
-          Container(
-            color: Colors.black,
-            height: 150,
+          Expanded(
+            child: Container(
+              color: Colors.black12,
+              height: 150,
+              child: const FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Icon(Icons.abc),
+              ),
+            ),
           ),
           Container(
             color: Colors.green,
