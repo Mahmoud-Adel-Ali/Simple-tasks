@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -15,90 +16,40 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LayoutBuilderExample(),
+      home: ExpandedExample(),
     );
   }
 }
-
-class LayoutBuilderExample extends StatelessWidget {
-  const LayoutBuilderExample({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(builder: (context, constrains) {
-        log(constrains.maxWidth.toString());
-        if (constrains.maxWidth <= 450) {
-          return const MobileLayout();
-        } else {
-          return const DesktopLayout();
-        }
-      }),
-    );
-  }
-}
-
-class DesktopLayout extends StatefulWidget {
-  const DesktopLayout({super.key});
-
-  @override
-  State<DesktopLayout> createState() => _DesktopLayoutState();
-}
-
-class _DesktopLayoutState extends State<DesktopLayout> {
-  int currentIndex = 1;
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  currentIndex = index + 1;
-                  setState(() {});
-                },
-                child: Container(
-                  color: Colors.amber,
-                  margin: const EdgeInsets.all(5),
-                  child: ListTile(
-                    title: Text("${index + 1}"),
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-        Expanded(
-            child: Center(
-              child: Text(currentIndex.toString()),
-            ))
-      ],
-    );
-  }
-}
-
-class MobileLayout extends StatelessWidget {
-  const MobileLayout({
-    super.key,
-  });
+class ExpandedExample extends StatelessWidget {
+  const ExpandedExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView.builder(
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return Container(
-            color: Colors.amber,
-            margin: const EdgeInsets.all(5),
-            child: ListTile(
-              title: Text("${index + 1}"),
+    return  Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            flex: 2,
+            child: Container(
+              color: Colors.amber,
+              height: 150,
             ),
-          );
-        },
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              color: Colors.black,
+              height: 150,
+            ),
+          ),
+          Expanded(
+            flex: 1,// by default  =  1
+            child: Container(
+              color: Colors.green,
+              height: 150,
+            ),
+          ),
+        ],
       ),
     );
   }
