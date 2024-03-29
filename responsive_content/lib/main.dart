@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  HomeVeiw(),
+      home: HomeVeiw(),
     );
   }
 }
@@ -22,8 +25,27 @@ class HomeVeiw extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    log(height.toString());
     return Scaffold(
-      body: Container(),
-    );
+        body: Column(
+      children: [
+        Container(
+          height: height * 0.3,
+          width: 200,
+          color: Colors.amber,
+        ),
+        Container(
+          height: height * 0.3,
+          width: 200,
+          color: Colors.black,
+        ),
+        Container(
+          height: height * 0.3,
+          width: 200,
+          color: Colors.green,
+        ),
+      ],
+    ));
   }
 }
