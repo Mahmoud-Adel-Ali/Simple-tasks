@@ -46,20 +46,21 @@ class _SnappingEffectState extends State<SnappingEffect> {
         body: Column(
           children: [
             SizedBox(
-              height: MediaQuery.of(context).size.height*0.7,
+              height: MediaQuery.of(context).size.height*0.4,
               child: ScrollSnapList(
                 itemBuilder: _buildListItem,
                 itemCount: museumList.length,
-                itemSize: 350,
+                itemSize: 150,
                 onItemFocus: (index) {},
                 dynamicItemSize: true,
-                scrollDirection: Axis.vertical,
+                // scrollDirection: Axis.vertical,
                 duration: 100,
                 scrollPhysics: const AlwaysScrollableScrollPhysics(),
                 initialIndex: museumList.length / 2,
                 focusOnItemTap: false,
                 shrinkWrap: false,
                 updateOnScroll: true,
+                
                 // reverse: true,
                 
               ),
@@ -72,7 +73,7 @@ class _SnappingEffectState extends State<SnappingEffect> {
 
   Widget _buildListItem(BuildContext context, int index) {
     return SizedBox(
-      height: 350,
+      height: 150,
       width: 150,
       child: Card(
         elevation: 12,
