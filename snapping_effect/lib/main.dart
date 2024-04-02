@@ -50,7 +50,7 @@ class _SnappingEffectState extends State<SnappingEffect> {
               child: ScrollSnapList(
                 itemBuilder: _buildListItem,
                 itemCount: museumList.length,
-                itemSize: 300,
+                itemSize: 350,
                 onItemFocus: (index) {},
                 dynamicItemSize: true,
                 scrollDirection: Axis.vertical,
