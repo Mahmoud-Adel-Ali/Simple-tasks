@@ -35,7 +35,7 @@ class _SnappingEffectState extends State<SnappingEffect> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text(
+          title: const Text( 
             "Museums",
             style: TextStyle(
                 fontSize: 25,
